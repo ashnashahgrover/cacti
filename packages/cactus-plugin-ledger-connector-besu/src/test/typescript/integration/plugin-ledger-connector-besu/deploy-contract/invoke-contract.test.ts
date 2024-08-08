@@ -183,25 +183,25 @@ describe(testCase, () => {
       });
       expect(setNameOut).toBeTruthy();
 
-      try {
-        const setNameOutInvalid = await connector.invokeContract({
-          contractName,
-          keychainId: keychainPlugin.getKeychainId(),
-          invocationType: EthContractInvocationType.Send,
-          methodName: "setName",
-          params: [newName],
-          gas: 1000000,
-          signingCredential: {
-            ethAccount: testEthAccount.address,
-            secret: testEthAccount.privateKey,
-            type: Web3SigningCredentialType.PrivateKeyHex,
-          },
-          nonce: 1,
-        });
-        expect(setNameOutInvalid.transactionReceipt).toBeFalsy();
-      } catch (error) {
-        expect(error.message).toMatch("Nonce too low");
-      }
+      await expect(connector.invokeContract({
+        contractName,
+        keychainId: keychainPlugin.getKeychainId(),
+        invocationType: EthContractInvocationType.Send,
+        methodName: "setName",
+        params: [newName],
+        gas: 1000000,
+        signingCredential: {
+          ethAccount: testEthAccount.address,
+          secret: testEthAccount.privateKey,
+          type: Web3SigningCredentialType.PrivateKeyHex,
+        },
+        nonce: 1,
+      })).rejects.toThrowError(
+        expect.objectContaining({
+          message: expect.stringContaining("Nonce too low"),
+        })
+      );
+      
 
       const { callOutput: getNameOut } = await connector.invokeContract({
         contractName,
@@ -286,8 +286,8 @@ describe(testCase, () => {
       });
       expect(setNameOut).toBeTruthy();
 
-      try {
-        const setNameOutInvalid = await connector.invokeContract({
+      await expect(
+        connector.invokeContract({
           contractName,
           keychainId: keychainPlugin.getKeychainId(),
           invocationType: EthContractInvocationType.Send,
@@ -296,11 +296,8 @@ describe(testCase, () => {
           gas: 1000000,
           signingCredential,
           nonce: 4,
-        });
-        expect(setNameOutInvalid.transactionReceipt).toBeFalsy();
-      } catch (error) {
-        expect(error.message).toMatch("Nonce too low");
-      }
+        })
+      ).rejects.toThrow("Nonce too low");      
 
       const { callOutput: getNameOut } = await connector.invokeContract({
         contractName,
