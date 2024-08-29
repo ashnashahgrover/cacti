@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1724279962868,
+  "lastUpdate": 1724972103170,
   "repoUrl": "https://github.com/ashnashahgrover/cacti",
   "entries": {
     "Benchmark": [
@@ -69,6 +69,44 @@ window.BENCHMARK_DATA = {
             "range": "±2.71%",
             "unit": "ops/sec",
             "extra": "178 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "peter.somogyvari@accenture.com",
+            "name": "Peter Somogyvari",
+            "username": "petermetz"
+          },
+          "committer": {
+            "email": "petermetz@users.noreply.github.com",
+            "name": "Peter Somogyvari",
+            "username": "petermetz"
+          },
+          "distinct": true,
+          "id": "6872ec53485b3b960fc3f88d162510646a2272ab",
+          "message": "test(test-tooling): jest migrate postgres container constructor options\n\nSigned-off-by: Peter Somogyvari <peter.somogyvari@accenture.com>",
+          "timestamp": "2024-08-29T09:58:36-07:00",
+          "tree_id": "9e125a93f6cef4fcdec1584946020ae65b86746f",
+          "url": "https://github.com/ashnashahgrover/cacti/commit/6872ec53485b3b960fc3f88d162510646a2272ab"
+        },
+        "date": 1724972101759,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "cmd-api-server_HTTP_GET_getOpenApiSpecV1",
+            "value": 585,
+            "range": "±1.72%",
+            "unit": "ops/sec",
+            "extra": "176 samples"
+          },
+          {
+            "name": "cmd-api-server_gRPC_GetOpenApiSpecV1",
+            "value": 344,
+            "range": "±2.03%",
+            "unit": "ops/sec",
+            "extra": "181 samples"
           }
         ]
       }
